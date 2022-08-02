@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: C:\bins\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: game-api-service
+  name: game-api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: game-api-service
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: C:\bins\kompose.exe convert
+        kompose.version: 1.26.1 (a9d05d509)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/game-network: "true"
+        io.kompose.service: game-api-service
+    spec:
+      containers:
+        - env:
+            - name: MONGODB_CLUSTER
+              value: mongodb+srv://sa:parolagameSA@cluster0.hpfqy.mongodb.net/gamedb?retryWrites=true&w=majority
+            - name: REDIS_HOST
+              value: redis-service
+          image: goiac/joc-apps-game-api-service:latest
+          name: game-api-service
+          ports:
+            - containerPort: 8080
+          resources: {}
+      restartPolicy: Always
+status: {}

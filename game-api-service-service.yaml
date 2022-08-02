@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: C:\bins\kompose.exe convert
+    kompose.version: 1.26.1 (a9d05d509)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: game-api-service
+  name: game-api-service
+spec:
+  ports:
+    - name: "66"
+      port: 66
+      targetPort: 8080
+  selector:
+    io.kompose.service: game-api-service
+status:
+  loadBalancer: {}

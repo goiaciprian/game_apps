@@ -1,13 +1,16 @@
 version: '3'
 services:
-  redis_container:
-    container_name: redis_container
+  redis-service:
+    container_name: redis-service
     image: redis
     networks:
-      - game_network
+      - game-network
+    ports:
+      - "6379:6379"
 
-  game_api_container:
-    container_name: game_api_container
+  game-api-service:
+    container_name: game-api-service
+    image: goiac/joc-apps-game-api-service:latest
     build: 
       context: ./GameAPI
       dockerfile: Dockerfile
@@ -15,24 +18,27 @@ services:
       - "66:8080"
     environment:
       - MONGODB_CLUSTER=mongodb+srv://sa:parolagameSA@cluster0.hpfqy.mongodb.net/gamedb?retryWrites=true&w=majority
-      - REDIS_HOST=redis_container
+      - REDIS_HOST=redis-service
     depends_on:
-      - redis_container
+      - redis-service
     networks:
-      - game_network
+      - game-network
 
-  runner_service:
+  runner-service:
+    image: goiac/joc-apps-runner-service:fixed-latest
     container_name: runner_service
     build: 
       context: ./runnerService
       dockerfile: Dockerfile
     environment:
-      - REDIS_HOST=redis_container
+      - REDIS_HOST=redis-service
     depends_on:
-      - redis_container
+      - redis-service
     networks:
-      - game_network
+      - game-network
+    ports:
+      - "8088:8080"
 
 networks:
-  game_network:
+  game-network:
     driver: bridge
