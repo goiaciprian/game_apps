@@ -1,4 +1,4 @@
-FROM maven:3.8.5-openjdk-18
+FROM maven:3.8.5-openjdk-17
 
 COPY ./ App/
 WORKDIR App/
