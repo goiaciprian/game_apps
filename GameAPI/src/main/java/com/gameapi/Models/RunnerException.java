@@ -8,24 +8,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @Document
 @RequiredArgsConstructor
 @NoArgsConstructor
-
-public class SubmittedCode implements Serializable {
-
+public class RunnerException implements Serializable {
     @Id
     private String id;
-
     @NonNull
-    private String userId;
+    private Date exceptionDate;
     @NonNull
-    private String code;
-    @NonNull
-    private String testCode;
-
-    private boolean successfulExecuted = false;
-
+    private String exceptionLog;
 }

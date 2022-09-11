@@ -1,6 +1,9 @@
 package com.gameapi.Models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.util.ArrayList;
@@ -17,5 +20,9 @@ public class User {
     private String email;
     private String password;
     @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList<>() {
+        {
+            add(Role.ROLE_USER);
+        }
+    };
 }
