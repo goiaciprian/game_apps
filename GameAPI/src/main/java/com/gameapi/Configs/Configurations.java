@@ -4,11 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gameapi.DTOs.RedisDTO.SubmittedCodeRedis;
 import com.gameapi.DTOs.WSResponse;
 import com.gameapi.Models.RunnerException;
+import com.gameapi.Repositories.UserRepository;
 import com.gameapi.Services.WebSocketHandlerService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
@@ -27,14 +30,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-@org.springframework.context.annotation.Configuration
-public class Configuration {
+@Configuration
+@RequiredArgsConstructor
+public class Configurations {
 
     @Value("${spring.redis.host}")
     private String host;
 
     @Value("${spring.redis.port}")
     private int port;
+
+    private final UserRepository _userRepository;
+
 
     @Bean
     public Sinks.Many<WSResponse<String>> getSinks() {
