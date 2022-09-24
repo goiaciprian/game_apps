@@ -5,8 +5,7 @@ services:
     image: redis
     networks:
       - game-network
-    ports:
-      - "6379:6379"
+
 
   game-api-service:
     container_name: game-api-service
@@ -25,7 +24,7 @@ services:
       - game-network
 
   runner-service:
-    image: goiac/joc-apps-runner-service:fixed-latest
+    image: goiac/joc-apps-runner-service:latest
     container_name: runner_service
     build: 
       context: ./runnerService

@@ -1,14 +1,13 @@
-package com.gameapi.DTOs.RedisDTO;
+package com.gameapi.DTOs.ResponseDTO;
 
 import lombok.Data;
 
 import java.io.Serializable;
 
 @Data
-public class SubmittedCodeRedis implements Serializable {
+public class SubmittedCodeResponseDTO implements Serializable {
     private String id;
     private String userId;
     private String code;
     private String testCode;
-    private boolean successfulExecuted = false;
 }
