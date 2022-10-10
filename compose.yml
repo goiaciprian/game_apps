@@ -5,7 +5,6 @@ services:
     networks:
       - game-network
 
-
   game-api-service:
     container_name: game-api-service
     image: goiac/joc-apps-game-api-service:latest
@@ -40,3 +39,4 @@ services:
 networks:
   game-network:
     driver: bridge
+    name: game-network
