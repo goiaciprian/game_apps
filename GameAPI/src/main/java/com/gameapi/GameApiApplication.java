@@ -22,6 +22,5 @@ public class GameApiApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void run() {
         _redisService.listenToRunnerService();
-//        _redisService.listenToRunnerServiceExceptions();
     }
 }
