@@ -4,8 +4,14 @@
   "projects": {
     "admin-panel": "apps/admin-panel",
     "admin-panel-e2e": "apps/admin-panel-e2e",
+    "authenticate-ui": "libs/authenticate-ui",
+    "authenticated-user": "libs/authenticated-user",
+    "configurations": "libs/configurations",
     "game-ui": "apps/game-ui",
     "game-ui-e2e": "apps/game-ui-e2e",
     "users-data-access": "libs/users-data-access"
-  }
+  },
+  "styles": [
+    "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+  ]
 }

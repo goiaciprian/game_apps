@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/game-ui",
         "index": "apps/game-ui/src/index.html",
@@ -14,8 +16,13 @@
         "polyfills": "apps/game-ui/src/polyfills.ts",
         "tsConfig": "apps/game-ui/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/game-ui/src/favicon.ico", "apps/game-ui/src/assets"],
-        "styles": ["apps/game-ui/src/styles.scss"],
+        "assets": [
+          "apps/game-ui/src/favicon.ico",
+          "apps/game-ui/src/assets"
+        ],
+        "styles": [
+          "apps/game-ui/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -72,12 +79,17 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/game-ui/**/*.ts", "apps/game-ui/**/*.html"]
+        "lintFilePatterns": [
+          "apps/game-ui/**/*.ts",
+          "apps/game-ui/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/game-ui"],
+      "outputs": [
+        "coverage/apps/game-ui"
+      ],
       "options": {
         "jestConfig": "apps/game-ui/jest.config.ts",
         "passWithNoTests": true

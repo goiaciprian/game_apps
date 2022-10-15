@@ -15,7 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@workspace-uis/authenticate-ui": ["libs/authenticate-ui/src/index.ts"],
+      "@workspace-uis/authenticated-user": [
+        "libs/authenticated-user/src/index.ts"
+      ],
+      "@workspace-uis/configurations": ["libs/configurations/src/index.ts"],
       "@workspace-uis/data-access": ["libs/data-access/src/index.ts"],
+      "@workspace-uis/libs/authenticated-user": [
+        "libs/libs/authenticated-user/src/index.ts"
+      ],
       "@workspace-uis/root-data-access": ["libs/root-data-access/src/index.ts"],
       "@workspace-uis/users-data-access": [
         "libs/users-data-access/src/index.ts"

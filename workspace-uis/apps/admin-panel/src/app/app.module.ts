@@ -2,23 +2,30 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
-import {UsersDataAccessModule, usersReducer} from "@workspace-uis/users-data-access";
+import {
+  UsersDataAccessModule,
+  usersReducer,
+} from '@workspace-uis/users-data-access';
+import { ENVIRONMENT_CONFIG } from '@workspace-uis/configurations';
+import { LoginRegisterPageComponent } from './Pages/login-register-page/login-register-page.component';
+import {routes} from "./app.routing";
+import {AuthenticateUiModule} from "@workspace-uis/authenticate-ui";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
+  declarations: [AppComponent, LoginRegisterPageComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabledBlocking' }),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
     StoreModule.forRoot(
       {
-        users: usersReducer
+        users: usersReducer,
       },
       {
         metaReducers: !environment.production ? [] : [],
@@ -31,9 +38,11 @@ import {UsersDataAccessModule, usersReducer} from "@workspace-uis/users-data-acc
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreRouterConnectingModule.forRoot(),
-    UsersDataAccessModule
+    UsersDataAccessModule,
+    AuthenticateUiModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{ provide: ENVIRONMENT_CONFIG, useValue: environment }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

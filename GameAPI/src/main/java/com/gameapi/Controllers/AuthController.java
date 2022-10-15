@@ -31,7 +31,7 @@ public class AuthController {
     public Mono<ResponseEntity<AuthResponseDTO>> login(@Valid @RequestBody AuthenticationRequest request) {
         return userRepository.findByEmail(request.getUsername())
                 .filter(user -> _encoder.encode(request.getPassword()).equals(user.getPassword()))
-                .map(user -> ResponseEntity.ok(AuthResponseDTO.builder().token(_jwtUtil.generateToken(user)).build()))
+                .map(user -> ResponseEntity.ok(AuthResponseDTO.builder().token(_jwtUtil.generateToken(user)).username(request.getUsername()).build()))
                 .switchIfEmpty(Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build()));
     }
 
@@ -41,7 +41,7 @@ public class AuthController {
                         User.builder().email(register.getUsername()).password(_encoder.encode(register.getPassword())).build()
                 )
                 .flatMap((user) ->{
-                    var userDto = AuthResponseDTO.builder().token(_jwtUtil.generateToken(user)).build();
+                    var userDto = AuthResponseDTO.builder().token(_jwtUtil.generateToken(user)).username(user.getUsername()).build();
                     var response = ResponseEntity.status(HttpStatus.CREATED).body(userDto);
                     return Mono.just(response);
                 });

@@ -1,0 +1,26 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/authenticate-ui/src",
+  "prefix": "workspace-uis",
+  "targets": {
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/authenticate-ui/src/test.ts",
+        "tsConfig": "libs/authenticate-ui/tsconfig.spec.json",
+        "karmaConfig": "libs/authenticate-ui/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/authenticate-ui/**/*.ts",
+          "libs/authenticate-ui/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

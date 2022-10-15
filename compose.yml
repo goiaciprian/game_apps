@@ -8,14 +8,16 @@ services:
   game-api-service:
     container_name: game-api-service
     image: goiac/joc-apps-game-api-service:latest
-    build: 
+    build:
       context: ./GameAPI
       dockerfile: Dockerfile
     ports:
       - "66:8080"
     environment:
-      - MONGODB_CLUSTER=mongodb+srv://sa:parolagameSA@cluster0.hpfqy.mongodb.net/gamedb?retryWrites=true&w=majority
       - REDIS_HOST=redis-service
+    env_file:
+      - compose.env
+        
     depends_on:
       - redis-service
     networks:
@@ -24,7 +26,7 @@ services:
   runner-service:
     image: goiac/joc-apps-runner-service:latest
     container_name: runner_service
-    build: 
+    build:
       context: ./runnerService
       dockerfile: Dockerfile
     environment:

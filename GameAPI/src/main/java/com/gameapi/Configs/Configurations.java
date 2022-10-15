@@ -40,8 +40,6 @@ public class Configurations {
     @Value("${spring.redis.port}")
     private int port;
 
-    private final UserRepository _userRepository;
-
 
     @Bean
     public Sinks.Many<WSResponse<String>> getSinks() {
@@ -50,7 +48,6 @@ public class Configurations {
 
     @Bean
     public LettuceConnectionFactory connectionFactory() {
-        log.info("Redis address: {}:{}", host, port);
         return new LettuceConnectionFactory(host, port);
     }
     @Bean
