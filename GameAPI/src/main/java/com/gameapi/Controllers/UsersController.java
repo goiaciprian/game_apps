@@ -1,10 +1,16 @@
 package com.gameapi.Controllers;
 
+import com.gameapi.CacheServices.UserCacheService;
 import com.gameapi.DTOs.RequestDTO.AuthenticationRequest;
+import com.gameapi.DTOs.UserDTO;
+import com.gameapi.Interfaces.IUserService;
 import com.gameapi.Models.Role;
 import com.gameapi.Models.User;
 import com.gameapi.Repositories.UserRepository;
+import com.gameapi.Services.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -17,17 +23,19 @@ import javax.validation.Valid;
 @RequestMapping("api/users")
 public class UsersController {
 
-    private final UserRepository _repository;
+    private final UserCacheService _service;
+    private final ModelMapper _mapper;
 
-    @PostMapping
-    public Mono<User> PostUser(@Valid @RequestBody AuthenticationRequest user) {
-        return _repository.save(User.builder().email(user.getUsername()).password(user.getPassword()).build());
+    @GetMapping("{id}")
+    public Mono<UserDTO> findByid(@PathVariable("id") String id) {
+        return this._service.getUserById(id).map(user -> _mapper.map(user, UserDTO.class));
     }
 
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('PROFESOR')")
     @GetMapping
-    public Flux<User> GerUsers() {
-        return _repository.findAll();
+    public Flux<UserDTO> GetUsers() {
+        return this._service.findAllUsers()
+                .map(user -> _mapper.map(user, UserDTO.class));
     }
 }

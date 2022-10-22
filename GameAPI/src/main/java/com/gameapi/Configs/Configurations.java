@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gameapi.DTOs.RedisDTO.SubmittedCodeRedis;
 import com.gameapi.DTOs.WSResponse;
 import com.gameapi.Models.RunnerException;
+import com.gameapi.Models.User;
 import com.gameapi.Repositories.UserRepository;
 import com.gameapi.Services.WebSocketHandlerService;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializationContext;
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.*;
 import org.springframework.web.reactive.HandlerMapping;
 import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping;
 import org.springframework.web.reactive.socket.server.WebSocketService;
@@ -67,6 +67,17 @@ public class Configurations {
         return new ReactiveRedisTemplate<>(lettuceConnectionFactory, serializationContext);
     }
 
+    @Bean
+    public ReactiveHashOperations<String, String, User> getHashOps(LettuceConnectionFactory lettuceConnectionFactory) {
+        RedisSerializer<User> serializer = new Jackson2JsonRedisSerializer<>(User.class);
+        RedisSerializationContext<String, User> serializationContext = RedisSerializationContext.<String, User>newSerializationContext(RedisSerializer.string())
+                .key(new StringRedisSerializer())
+                .value(serializer)
+                .hashKey(new StringRedisSerializer())
+                .hashValue(new GenericJackson2JsonRedisSerializer())
+                .build();
+        return new ReactiveRedisTemplate<>(lettuceConnectionFactory, serializationContext).opsForHash(serializationContext);
+    }
 
     @Bean
     public ModelMapper modelMapper() {

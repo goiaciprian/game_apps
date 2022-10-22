@@ -1,5 +1,7 @@
 package com.gameapi.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,10 +21,11 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     @Id
     private String id;
+
     private String email;
     private String password;
     @Builder.Default
@@ -34,18 +38,23 @@ public class User implements UserDetails {
     private boolean isEnabled = true;
 
     @Builder.Default
-    private List<Role> roles = new ArrayList<>() {
-        {
-            add(Role.ROLE_USER);
-        }
-    };
+    private List<String> roles = new ArrayList<>();
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream().map(authority -> new SimpleGrantedAuthority(authority.getRoleString())).collect(Collectors.toList());
+    public void setRole(boolean isProf) {
+        this.roles.add(Role.ROLE_USER.getRoleString());
+        if(isProf)
+            this.roles.add(Role.ROLE_PROFESOR.getRoleString());
+
     }
 
     @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+    }
+
+    @Override
+    @JsonIgnore
     public String getUsername() {
         return this.email;
     }
