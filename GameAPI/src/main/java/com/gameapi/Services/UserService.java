@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-@ConditionalOnProperty(value = "cache.enabled", havingValue = "false")
+@ConditionalOnProperty(prefix = "cache", name = "enabled", havingValue = "false")
 public class UserService implements IUserService {
 
     private final UserRepository _userRepo;
