@@ -5,6 +5,23 @@ services:
     networks:
       - game-network
 
+  building-api:
+      container_name: buildings-api
+      image: goiac/joc-apps-buildings-api-service:latest
+      build:
+          context: ./BuildingsApi
+          dockerfile: Dockerfile
+      ports:
+          - "68:8081"
+      environment:
+          - REDIS_HOST=redis-service
+      env_file:
+          - compose.env
+      depends_on:
+          - redis-service
+      networks:
+          - game-network
+
   game-api-service:
     container_name: game-api-service
     image: goiac/joc-apps-game-api-service:latest

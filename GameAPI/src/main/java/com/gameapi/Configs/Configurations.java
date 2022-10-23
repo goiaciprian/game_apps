@@ -85,7 +85,6 @@ public class Configurations {
         return new UserCacheService(_usrRepo, _hashOps);
     }
 
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
