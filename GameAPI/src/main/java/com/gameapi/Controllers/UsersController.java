@@ -23,7 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("api/users")
 public class UsersController {
 
-    private final UserCacheService _service;
+    private final IUserService _service;
     private final ModelMapper _mapper;
 
     @GetMapping("{id}")

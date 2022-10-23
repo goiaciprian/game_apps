@@ -10,9 +10,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@Service
+
 @Slf4j
-@ConditionalOnProperty(value = "cache.enabled", havingValue = "true")
+@Service
+@ConditionalOnProperty(prefix = "cache", name = "enabled", havingValue = "true")
 public class UserCacheService extends UserService {
 
     private final String KEY = "USER_KEY";
@@ -30,20 +31,26 @@ public class UserCacheService extends UserService {
 
     @Override
     public Mono<User> findByEmail(String email) {
-        return _hashOps.get(KEY, email)
-                .switchIfEmpty(this.getFromDbByEmailAndCache(email));
+//        if(cacheEnable)
+            return _hashOps.values(KEY).
+                    filter(usr -> usr.getEmail().equals(email))
+                    .collectList()
+                    .flatMap(usrList -> usrList.isEmpty() ? Mono.empty(): Mono.just(usrList.get(0)))
+                    .switchIfEmpty(Mono.defer(() -> this.getFromDbByEmailAndCache(email)));
+//        else
+//            return super.findByEmail(email);
     }
 
     @Override
     public Mono<User> getUserById(String userId) {
         return _hashOps.get(KEY, userId)
-                .switchIfEmpty(this.getFromDbByIdAndCache(userId));
+                .switchIfEmpty(Mono.defer(() -> this.getFromDbByIdAndCache(userId)));
     }
 
     @Override
     public Flux<User> findAllUsers() {
         return _hashOps.values(KEY)
-                .switchIfEmpty(this.getAllFromDbAndCache());
+                .switchIfEmpty(Flux.defer(this::getAllFromDbAndCache));
     }
 
     @Override

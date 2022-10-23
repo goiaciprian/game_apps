@@ -1,6 +1,7 @@
 package com.gameapi.Configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gameapi.CacheServices.UserCacheService;
 import com.gameapi.DTOs.RedisDTO.SubmittedCodeRedis;
 import com.gameapi.DTOs.WSResponse;
 import com.gameapi.Models.RunnerException;
@@ -78,6 +79,12 @@ public class Configurations {
                 .build();
         return new ReactiveRedisTemplate<>(lettuceConnectionFactory, serializationContext).opsForHash(serializationContext);
     }
+
+    @Bean
+    public UserCacheService getUserCacheService(UserRepository _usrRepo, ReactiveHashOperations<String, String, User> _hashOps ) {
+        return new UserCacheService(_usrRepo, _hashOps);
+    }
+
 
     @Bean
     public ModelMapper modelMapper() {
