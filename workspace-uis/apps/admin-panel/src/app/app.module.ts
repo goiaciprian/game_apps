@@ -14,12 +14,18 @@ import {
 } from '@workspace-uis/users-data-access';
 import { ENVIRONMENT_CONFIG } from '@workspace-uis/configurations';
 import { LoginRegisterPageComponent } from './Pages/login-register-page/login-register-page.component';
-import {routes} from "./app.routing";
-import {AuthenticateUiModule} from "@workspace-uis/authenticate-ui";
+import { routes } from './app.routing';
+import { AuthenticateUiModule } from '@workspace-uis/authenticate-ui';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CodeProblemsUiModule } from '@workspace-uis/code-problems-ui';
+import { CodeProblemsPageComponent } from './Pages/code-problems-page/code-problems-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginRegisterPageComponent],
+  declarations: [
+    AppComponent,
+    LoginRegisterPageComponent,
+    CodeProblemsPageComponent,
+  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabledBlocking' }),
@@ -40,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoreRouterConnectingModule.forRoot(),
     UsersDataAccessModule,
     AuthenticateUiModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    CodeProblemsUiModule,
   ],
   providers: [{ provide: ENVIRONMENT_CONFIG, useValue: environment }],
   bootstrap: [AppComponent],

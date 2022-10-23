@@ -6,6 +6,7 @@
     "admin-panel-e2e": "apps/admin-panel-e2e",
     "authenticate-ui": "libs/authenticate-ui",
     "authenticated-user": "libs/authenticated-user",
+    "code-problems-ui": "libs/code-problems-ui",
     "configurations": "libs/configurations",
     "game-ui": "apps/game-ui",
     "game-ui-e2e": "apps/game-ui-e2e",

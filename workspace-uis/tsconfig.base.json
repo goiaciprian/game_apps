@@ -19,6 +19,7 @@
       "@workspace-uis/authenticated-user": [
         "libs/authenticated-user/src/index.ts"
       ],
+      "@workspace-uis/code-problems-ui": ["libs/code-problems-ui/src/index.ts"],
       "@workspace-uis/configurations": ["libs/configurations/src/index.ts"],
       "@workspace-uis/data-access": ["libs/data-access/src/index.ts"],
       "@workspace-uis/libs/authenticated-user": [

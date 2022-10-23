@@ -1,0 +1,26 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/code-problems-ui/src",
+  "prefix": "workspace-uis",
+  "targets": {
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/code-problems-ui/src/test.ts",
+        "tsConfig": "libs/code-problems-ui/tsconfig.spec.json",
+        "karmaConfig": "libs/code-problems-ui/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/code-problems-ui/**/*.ts",
+          "libs/code-problems-ui/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
