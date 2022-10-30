@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SubmittedCodeDTO {
-    private String userId;
+    private String createdBy;
     private String code;
     private String testCode;
 }

@@ -20,12 +20,13 @@ public class SubmittedCode implements Serializable {
     private String id;
 
     @NonNull
-    private String userId;
+    private String createdBy;
     @NonNull
     private String code;
     @NonNull
     private String testCode;
-
     private boolean successfulExecuted = false;
 
+    private String stdout;
+    private String stderr;
 }

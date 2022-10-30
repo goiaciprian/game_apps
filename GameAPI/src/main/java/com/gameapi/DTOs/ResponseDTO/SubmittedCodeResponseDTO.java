@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class SubmittedCodeResponseDTO implements Serializable {
     private String id;
-    private String userId;
+    private String createdBy;
     private String code;
     private String testCode;
 }

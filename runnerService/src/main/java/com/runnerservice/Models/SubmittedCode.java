@@ -9,8 +9,10 @@ import lombok.*;
 @Setter
 public class SubmittedCode {
     private String id;
-    private String userId;
+    private String createdBy;
     private String code;
     private String testCode;
     private boolean successfulExecuted = false;
+    private String stdout;
+    private String stderr;
 }

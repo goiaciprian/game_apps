@@ -7,8 +7,10 @@ import java.io.Serializable;
 @Data
 public class SubmittedCodeRedis implements Serializable {
     private String id;
-    private String userId;
+    private String createdBy;
     private String code;
     private String testCode;
+    private String stdout;
+    private String stderr;
     private boolean successfulExecuted = false;
 }
