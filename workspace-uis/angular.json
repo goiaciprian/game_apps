@@ -8,6 +8,8 @@
     "authenticated-user": "libs/authenticated-user",
     "code-problems-ui": "libs/code-problems-ui",
     "configurations": "libs/configurations",
+    "game-assets": "libs/game-assets",
+    "game-container": "libs/game-container",
     "game-ui": "apps/game-ui",
     "game-ui-e2e": "apps/game-ui-e2e",
     "users-data-access": "libs/users-data-access"

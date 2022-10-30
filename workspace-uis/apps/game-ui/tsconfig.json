@@ -1,5 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
+  "lib": [
+    "es2018",
+    "dom",
+    "scripthost"
+  ],
   "files": [],
   "include": [],
   "references": [

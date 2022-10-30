@@ -1,0 +1,37 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/game-container/src",
+  "prefix": "workspace-uis",
+  "configurations": {
+    "production": {
+      "budgets": [
+        {
+          "type": "initial",
+          "maximumWarning": "1mb",
+          "maximumError": "2mb"
+        }
+      ]
+    }
+  },
+  "targets": {
+    "test": {
+      "executor": "@angular-devkit/build-angular:karma",
+      "options": {
+        "main": "libs/game-container/src/test.ts",
+        "tsConfig": "libs/game-container/tsconfig.spec.json",
+        "karmaConfig": "libs/game-container/karma.conf.js"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/game-container/**/*.ts",
+          "libs/game-container/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

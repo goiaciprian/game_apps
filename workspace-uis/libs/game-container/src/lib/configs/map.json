@@ -1,0 +1,20 @@
+{
+  "layers": [
+    {
+      "height": 12,
+      "width": 12
+    }
+  ],
+  "tileheight": 68,
+  "tilewidth": 132,
+  "tilesets": [
+    {
+      "terrains": [
+        {
+          "name": "ground_grass",
+          "tile": 0
+        }
+      ]
+    }
+  ]
+}

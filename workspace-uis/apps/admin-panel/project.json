@@ -18,7 +18,12 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/admin-panel/src/favicon.ico",
-          "apps/admin-panel/src/assets"
+          "apps/admin-panel/src/assets",
+          {
+            "input": "shared/assets",
+            "glob": "**/*",
+            "output": "assets/"
+          }
         ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
