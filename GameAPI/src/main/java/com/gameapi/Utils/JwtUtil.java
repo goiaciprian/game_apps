@@ -43,6 +43,8 @@ public class JwtUtil {
         return getAllClaimsFromToken(token).getExpiration();
     }
 
+    public String getUserId (String token) { return getAllClaimsFromToken(token).get("userId", String.class); }
+
 
     public Boolean validateToken(String token) {
         return !isTokenExpired(token);
